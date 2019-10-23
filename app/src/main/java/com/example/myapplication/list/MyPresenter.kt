@@ -4,7 +4,6 @@ class MyPresenter: MyContract.Presenter {
 
     private var mActivity: MyContract.View? = null
     private var mModel: MyContract.Model? = null
-    private var bean: Bean? = null
 
     override fun attachView(view: ListActivity) {
         mActivity = view

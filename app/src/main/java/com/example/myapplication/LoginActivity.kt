@@ -1,23 +1,21 @@
 package com.example.myapplication
 
 import android.content.Intent
-import android.nfc.Tag
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.list.ListActivity
 
 class LoginActivity : AppCompatActivity(), IMainView {
 
     private var mainPresenter: MainPresenter? = null
 
-    var textView: TextView? =null
-    var button: Button? = null
-    var usernameView: EditText? = null
-    var passwordView: EditText? = null
+    private lateinit var textView: TextView
+    private lateinit var button: Button
+    private lateinit var usernameView: EditText
+    private lateinit var passwordView: EditText
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,9 +34,14 @@ class LoginActivity : AppCompatActivity(), IMainView {
         usernameView = findViewById(R.id.username)
         passwordView = findViewById(R.id.password)
 
-        button?.setOnClickListener {
+        textView.setOnClickListener {
+            val mRoundedBottomSheetDialogFragment = RoundedBottomSheetDialogFragment()
+            mRoundedBottomSheetDialogFragment.show(supportFragmentManager, "RoundedBottomDialog")
+        }
+
+        button.setOnClickListener {
             println("Login")
-            mainPresenter?.login(passwordView?.text.toString(), usernameView?.text.toString())
+            mainPresenter?.login(passwordView.text.toString(), usernameView.text.toString())
             val intent = Intent(applicationContext, ListActivity::class.java)
             startActivity(intent)
         }
